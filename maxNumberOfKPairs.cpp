@@ -27,24 +27,43 @@
 class Solution {
 public:
     int maxOperations(vector<int>& nums, int k) {
-        int count = 0 ;
-        int i = 0;
-        int j = nums.size()-1;
-        sort(nums.begin(), nums.end());
-        while(i<j){
-            int sum = nums[i]+nums[j];
-            if(sum==k){
+        int count = 0;
+        unordered_map<int, int> mp;
+        for(int num: nums){
+            int need = k - num;
+            if(mp[need]>0){
                 count++;
-                i++;
-                j--;
-            }
-            else if(sum>k){
-                j--;
+                mp[need]--;
             }
             else{
-                i++;
+                mp[num]++;
             }
         }
         return count;
     }
 };
+
+// class Solution {
+// public:
+//     int maxOperations(vector<int>& nums, int k) {
+//         int count = 0 ;
+//         int i = 0;
+//         int j = nums.size()-1;
+//         sort(nums.begin(), nums.end());
+//         while(i<j){
+//             int sum = nums[i]+nums[j];
+//             if(sum==k){
+//                 count++;
+//                 i++;
+//                 j--;
+//             }
+//             else if(sum>k){
+//                 j--;
+//             }
+//             else{
+//                 i++;
+//             }
+//         }
+//         return count;
+//     }
+// };
